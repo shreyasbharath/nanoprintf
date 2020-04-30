@@ -499,7 +499,8 @@ int npf__parse_format_spec(char const *format, npf__format_spec_t *out_spec) {
 #endif
                 out_spec->precision = 0;
                 break;
-            case NPF_FMT_SPEC_CONV_SIGNED_INT:
+            case NPF_FMT_SPEC_CONV_
+                ED_INT:
             case NPF_FMT_SPEC_CONV_OCTAL:
             case NPF_FMT_SPEC_CONV_HEX_INT:
             case NPF_FMT_SPEC_CONV_UNSIGNED_INT:
@@ -850,6 +851,7 @@ int npf_vpprintf(npf_putc pc, void *pc_ctx, char const *format, va_list vlist) {
                     case NPF_FMT_SPEC_CONV_OCTAL:          /* 'o' */
                     case NPF_FMT_SPEC_CONV_HEX_INT:        /* 'x', 'X' */
                     case NPF_FMT_SPEC_CONV_UNSIGNED_INT: { /* 'u' */
+                        sign = 0;
                         unsigned const base =
                             (fs.conv_spec == NPF_FMT_SPEC_CONV_OCTAL)
                                 ? 8
